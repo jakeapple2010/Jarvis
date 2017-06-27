@@ -1,82 +1,167 @@
 ﻿using System;
 using System.IO;
-using System.Net;
+using System.Linq;
 using Google.Cloud.Speech.V1;
+using NAudio.Wave;
+using Renci.SshNet;
 
 namespace Jarvis
 {
     class Program
     {
+        public static WaveInEvent WaveSource;
+        public static WaveFileWriter WaveFile;
+        private static string _waveFilePath;
+
         static void Main(string[] args)
         {
-            var speech = SpeechClient.Create();
-            var response = speech.Recognize(new RecognitionConfig()
+            var text = ConvertSpeechToText("Say a command like Mark 1 to control Mark 1.");
+
+            if (text.ToLower().Contains("mark 1"))
             {
-                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
-                SampleRateHertz = 44100,
-                LanguageCode = "en",
-            }, RecognitionAudio.FromFile("good-morning-google.flac"));
-            foreach (var result in response.Results)
-            {
-                foreach (var alternative in result.Alternatives)
+                Console.WriteLine("Enter in the last set of Mark 1's IP");
+                var ipAddress = $"192.168.1.{Console.ReadLine()}";
+
+                while (true)
                 {
-                    Console.WriteLine(alternative.Transcript);
+                    var command = ConvertSpeechToText("What command would you like to execute?");
+
+                    Console.WriteLine(command);
+
+                    if (command.Contains("exit"))
+                    {
+                        break;
+                    }
+
+                    if (command.ToLower() == "left")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/left90.py");
+                    }
+
+                    if (command.ToLower() == "left 45")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/left45.py");
+                    }
+
+                    if (command.ToLower() == "right")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/right90.py");
+                    }
+
+                    if (command.ToLower() == "right 45")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/right45.py");
+                    }
+
+                    if (command.ToLower() == "forward")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/forward.py");
+                    }
+
+                    if (command.ToLower() == "stop")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/stop.py");
+                    }
+
+                    if (command.ToLower() == "reverse")
+                    {
+                        ExecuteSshCommand(ipAddress, "python pythonRobot/voiceDirections/reverse.py");
+                    }
                 }
             }
 
-            //try
-            //{
-
-            //    var response = GoogleRequest(fileBytes, 44100);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.ToString());
-            //}
+            Console.WriteLine(text.ToLower());
 
             Console.ReadLine();
         }
 
-        public static string GoogleRequest(byte[] bytes, int sampleRate)
+        private static void ExecuteSshCommand(string ipAddress, string command)
         {
-            Stream stream = null;
-            StreamReader sr = null;
-            WebResponse response = null;
-            string respFromServer;
-            try
+            using (var client = new SshClient(ipAddress, "pi", "berry"))
             {
-                var request = WebRequest.Create("https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyDnVTLpLnS1o-JaiQEIFoDeHE5QQu_uViM");
-                request.Method = "POST";
-                request.ContentType = "audio/x-flac; rate=" + sampleRate;
-                request.ContentLength = bytes.Length;
-
-                stream = request.GetRequestStream();
-
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Close();
-
-                response = request.GetResponse();
-
-                stream = response.GetResponseStream();
-                if (stream == null)
-                {
-                    throw new Exception("Can't get a response from server. Response stream is null.");
-                }
-                sr = new StreamReader(stream);
-
-                //Get response in JSON format
-                respFromServer = sr.ReadToEnd();
+                client.Connect();
+                client.RunCommand(command);
+                client.Disconnect();
             }
-            finally
+        }
+
+        private static void Record(string message)
+        {
+            var thisApp = new Program();
+            thisApp.StartRecording();
+            Console.WriteLine(message + " Press enter to stop.");
+
+            Console.ReadLine();
+            thisApp.StopRecording();
+        }
+
+
+        private static string ConvertSpeechToText(string message)
+        {
+            Record(message);
+
+            var speech = SpeechClient.Create();
+            var response = speech.Recognize(new RecognitionConfig
             {
-                stream?.Close();
+                SampleRateHertz = 44100,
+                LanguageCode = "en"
+            }, RecognitionAudio.FromFile(_waveFilePath));
 
-                sr?.Close();
+            while (!response.Results.Any())
+            {
+                Console.WriteLine("I didn't understand that. Try again!");
+                Record(message);
+            }
+            var speechRecognitionAlternative = response.Results.First().Alternatives.OrderBy(x => x.Confidence).FirstOrDefault();
+            return speechRecognitionAlternative != null ? speechRecognitionAlternative.Transcript : string.Empty;
+        }
 
-                response?.Close();
+        private void StartRecording()
+        {
+            WaveSource = new WaveInEvent {WaveFormat = new WaveFormat(44100, 1)};
+
+            WaveSource.DataAvailable += new EventHandler<WaveInEventArgs>(waveSource_DataAvailable);
+            WaveSource.RecordingStopped += new EventHandler<StoppedEventArgs>(waveSource_RecordingStopped);
+
+            _waveFilePath = $@"{Directory.GetCurrentDirectory()}\Test0001.wav";
+
+            if (!File.Exists(_waveFilePath))
+            {
+                File.Create(_waveFilePath).Close();
+            }
+            WaveFile = new WaveFileWriter(_waveFilePath, WaveSource.WaveFormat);
+
+            WaveSource.StartRecording();
+        }
+
+        private void StopRecording()
+        {
+            WaveSource.StopRecording();
+            WaveFile.Close();
+        }
+
+        void waveSource_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            if (WaveFile != null)
+            {
+                WaveFile.Write(e.Buffer, 0, e.BytesRecorded);
+                WaveFile.Flush();
+            }
+        }
+
+        void waveSource_RecordingStopped(object sender, StoppedEventArgs e)
+        {
+            if (WaveSource != null)
+            {
+                WaveSource.Dispose();
+                WaveSource = null;
             }
 
-            return respFromServer;
+            if (WaveFile != null)
+            {
+                WaveFile.Dispose();
+                WaveFile = null;
+            }
         }
     }
 }

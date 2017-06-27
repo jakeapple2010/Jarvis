@@ -4,7 +4,6 @@ c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debu
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\obj\Debug\Jarvis.csprojResolveAssemblyReference.cache
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\obj\Debug\Jarvis.exe
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\obj\Debug\Jarvis.pdb
-c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\good-morning-google.flac
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Newtonsoft.Json.dll
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Newtonsoft.Json.xml
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Google.Apis.Auth.dll
@@ -52,3 +51,7 @@ c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debu
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Grpc.Core.xml
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\System.Interactive.Async.xml
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Zlib.Portable.xml
+c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\NAudio.dll
+c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\NAudio.xml
+c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Renci.SshNet.dll
+c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Renci.SshNet.xml
