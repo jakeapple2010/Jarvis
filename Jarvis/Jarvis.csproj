@@ -79,6 +79,9 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="Renci.SshNet, Version=2016.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
@@ -112,8 +115,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Execution\Execute.cs" />
+    <Compile Include="Execution\IExecute.cs" />
+    <Compile Include="Ninject\Bindings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpeechRecognition\IMicrophoneControl.cs" />
+    <Compile Include="SpeechRecognition\ISpeechRecognizer.cs" />
+    <Compile Include="SpeechRecognition\MicrophoneControl.cs" />
+    <Compile Include="SpeechRecognition\SpeechRecognizer.cs" />
+    <Compile Include="Ssh\ISsh.cs" />
+    <Compile Include="Ssh\MockSsh.cs" />
+    <Compile Include="Ssh\Ssh.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

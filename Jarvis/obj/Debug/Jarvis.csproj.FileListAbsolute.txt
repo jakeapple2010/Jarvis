@@ -55,3 +55,5 @@ c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debu
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\NAudio.xml
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Renci.SshNet.dll
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Renci.SshNet.xml
+c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Ninject.dll
+c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Ninject.xml
