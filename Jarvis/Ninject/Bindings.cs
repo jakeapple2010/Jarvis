@@ -13,7 +13,7 @@ namespace Jarvis.Ninject
             Bind<ISpeechRecognizer>().To<SpeechRecognizer>();
             Bind<IMicrophoneControl>().To<MicrophoneControl>();
             Bind<IExecute>().To<MicrosoftVoiceExecution>();
-            //Bind<IExecute>().To<Execute>();
+            Bind<IVoiceCommandRecognizedEventHandler>().To<VoiceCommandRecognized>();
 
         }
     }

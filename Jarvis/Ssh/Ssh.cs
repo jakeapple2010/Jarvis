@@ -1,4 +1,5 @@
-﻿using Renci.SshNet;
+﻿using System.Threading.Tasks;
+using Renci.SshNet;
 
 namespace Jarvis.Ssh
 {
@@ -6,12 +7,16 @@ namespace Jarvis.Ssh
     {
         public void ExecuteSshCommand(string ipAddress, string command)
         {
-            using (var client = new SshClient(ipAddress, "pi", "berry"))
-            {
-                client.Connect();
-                client.RunCommand(command);
-                client.Disconnect();
-            }
+            new Task(() =>
+                {
+                    using (var client = new SshClient(ipAddress, "pi", "berry"))
+                    {
+                        client.Connect();
+                        client.RunCommand(command);
+                        client.Disconnect();
+                    }
+                }
+            ).Start();
         }
     }
 }

@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="Execution\Execute.cs" />
     <Compile Include="Execution\IExecute.cs" />
+    <Compile Include="SpeechRecognition\IVoiceCommandRecognizedEventHandler.cs" />
     <Compile Include="Execution\MicrosoftVoiceExecution.cs" />
     <Compile Include="Ninject\Bindings.cs" />
     <Compile Include="Program.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="SpeechRecognition\ISpeechRecognizer.cs" />
     <Compile Include="SpeechRecognition\MicrophoneControl.cs" />
     <Compile Include="SpeechRecognition\SpeechRecognizer.cs" />
+    <Compile Include="SpeechRecognition\VoiceCommandRecognized.cs" />
     <Compile Include="Ssh\ISsh.cs" />
     <Compile Include="Ssh\MockSsh.cs" />
     <Compile Include="Ssh\Ssh.cs" />
