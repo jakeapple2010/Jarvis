@@ -12,7 +12,9 @@ namespace Jarvis.Ninject
             Bind<ISsh>().To<Ssh.Ssh>();
             Bind<ISpeechRecognizer>().To<SpeechRecognizer>();
             Bind<IMicrophoneControl>().To<MicrophoneControl>();
-            Bind<IExecute>().To<Execute>();
+            Bind<IExecute>().To<MicrosoftVoiceExecution>();
+            //Bind<IExecute>().To<Execute>();
+
         }
     }
 }
