@@ -12,14 +12,14 @@ namespace Jarvis.Execution
 {
     class MicrosoftVoiceExecution : IExecute
     {
-        public static SpeechRecognizer recognizer = new SpeechRecognizer();
-        public static SpeechSynthesizer synth = new SpeechSynthesizer();
+        public SpeechRecognizer recognizer = new SpeechRecognizer();
+        public SpeechSynthesizer synth = new SpeechSynthesizer();
         public void BeginLoop()
         {
             
             synth.SetOutputToDefaultAudioDevice();
             Choices commands = new Choices();
-            commands.Add(new string[] { "left", "right", "forward", "reverse", "stop" });
+            commands.Add(new string[] { "left", "right", "forward", "reverse", "stop", "turn around"});
             GrammarBuilder grammarBuilder = new GrammarBuilder();
             grammarBuilder.Append(commands);
 

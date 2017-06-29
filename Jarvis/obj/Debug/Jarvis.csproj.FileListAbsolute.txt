@@ -57,9 +57,6 @@ c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debu
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Renci.SshNet.xml
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Ninject.dll
 c:\users\jake apple\documents\visual studio 2017\Projects\Jarvis\Jarvis\bin\Debug\Ninject.xml
-C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\obj\Debug\Jarvis.csprojResolveAssemblyReference.cache
-C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\obj\Debug\Jarvis.exe
-C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\obj\Debug\Jarvis.pdb
 C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\grpc_csharp_ext.x86.dll
 C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\grpc_csharp_ext.x64.dll
 C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\libgrpc_csharp_ext.x86.so
@@ -116,3 +113,5 @@ C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\Ninject.xml
 C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\Renci.SshNet.xml
 C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\System.Interactive.Async.xml
 C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\bin\Debug\Zlib.Portable.xml
+C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\obj\Debug\Jarvis.exe
+C:\Users\Ben\Documents\GitHub\Jarvis\Jarvis\obj\Debug\Jarvis.pdb
