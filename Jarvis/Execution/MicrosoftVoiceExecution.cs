@@ -28,7 +28,7 @@ namespace Jarvis.Execution
 
             recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(eventSpeechRecognized);
 
-            synth.Speak("please say a command");
+            synth.Speak("Welcome, You may now begin commanding the robot.");
             while (true) ;
             
         }
