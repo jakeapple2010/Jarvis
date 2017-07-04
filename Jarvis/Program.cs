@@ -19,11 +19,19 @@ namespace Jarvis
 
         static void Main(string[] args)
         {
-
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            var execute = kernel.Get<IExecute>();
+            var thing = new AsyncGoogleVoiceRecognizer(kernel.Get<IVoiceCommandRecognizedEventHandler>());
+            
+
+            thing.StreamingMicRecognizeAsync(180);
+
+            while (true) ;
+
+
+
+            var execute = kernel.Get<IVoiceRecognizer>();
 
             execute.BeginLoop();
 

@@ -1,5 +1,6 @@
 ﻿using Jarvis.Execution;
 using Jarvis.SpeechRecognition;
+using Jarvis.SpeechSynthesizer;
 using Jarvis.Ssh;
 using Ninject.Modules;
 
@@ -12,9 +13,8 @@ namespace Jarvis.Ninject
             Bind<ISsh>().To<Ssh.Ssh>();
             Bind<ISpeechRecognizer>().To<SpeechRecognizer>();
             Bind<IMicrophoneControl>().To<MicrophoneControl>();
-            Bind<IExecute>().To<MicrosoftVoiceExecution>();
-            Bind<IVoiceCommandRecognizedEventHandler>().To<VoiceCommandRecognized>();
-
+            Bind<IVoiceRecognizer>().To<MicrosoftVoiceRecognizer>();
+            Bind<IVoiceCommandRecognizedEventHandler>().To<VoiceCommandRecognizedEventHandler>();
         }
     }
 }

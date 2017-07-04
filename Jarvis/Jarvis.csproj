@@ -116,10 +116,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Execution\Execute.cs" />
-    <Compile Include="Execution\IExecute.cs" />
+    <Compile Include="Execution\VoiceRecognizer.cs" />
+    <Compile Include="Execution\IVoiceRecognizer.cs" />
+    <Compile Include="SpeechRecognition\AsyncGoogleVoiceRecognizer.cs" />
     <Compile Include="SpeechRecognition\IVoiceCommandRecognizedEventHandler.cs" />
-    <Compile Include="Execution\MicrosoftVoiceExecution.cs" />
+    <Compile Include="Execution\MicrosoftVoiceRecognizer.cs" />
     <Compile Include="Ninject\Bindings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,7 +128,10 @@
     <Compile Include="SpeechRecognition\ISpeechRecognizer.cs" />
     <Compile Include="SpeechRecognition\MicrophoneControl.cs" />
     <Compile Include="SpeechRecognition\SpeechRecognizer.cs" />
-    <Compile Include="SpeechRecognition\VoiceCommandRecognized.cs" />
+    <Compile Include="SpeechRecognition\VoiceCommandRecognizedEventHandler.cs" />
+    <Compile Include="SpeechRecognition\VoiceRecognizedEvent.cs" />
+    <Compile Include="SpeechSynthesizer\ISpeechSynthesizer.cs" />
+    <Compile Include="SpeechSynthesizer\SpeechSynthesizer.cs" />
     <Compile Include="Ssh\ISsh.cs" />
     <Compile Include="Ssh\MockSsh.cs" />
     <Compile Include="Ssh\Ssh.cs" />
@@ -136,6 +140,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.2.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.2.0\build\net45\Grpc.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

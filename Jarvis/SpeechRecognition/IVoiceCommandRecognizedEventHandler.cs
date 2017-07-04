@@ -2,8 +2,8 @@
 
 namespace Jarvis.SpeechRecognition
 {
-    internal interface IVoiceCommandRecognizedEventHandler
+    public interface IVoiceCommandRecognizedEventHandler
     {
-        void eventSpeechRecognized(object sender, SpeechRecognizedEventArgs e);
+        void eventSpeechRecognized(VoiceRecognizedEvent e);
     }
 }
