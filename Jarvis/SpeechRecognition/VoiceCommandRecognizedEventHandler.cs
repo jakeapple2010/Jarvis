@@ -19,6 +19,11 @@ namespace Jarvis.SpeechRecognition
 
         public void eventSpeechRecognized(VoiceRecognizedEvent e)
         {
+            if (e.Transcripts == null)
+            {
+                return;
+            }
+
             var ipAddress = "192.168.1.196";
             //Console.WriteLine("Did you say " + text);
             //Console.WriteLine($"Attempting to recognize command: `{text}`");

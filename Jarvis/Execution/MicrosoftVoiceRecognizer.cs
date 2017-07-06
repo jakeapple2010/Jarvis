@@ -36,6 +36,7 @@ namespace Jarvis.Execution
             Grammar g = new Grammar(grammarBuilder);
             recognizer.LoadGrammar(g);
 
+            //recognizer.SpeechRecognized += voiceCommandRecognizedEventHandler.eventSpeechRecognized;
 
             synth.Speak("Welcome, You may now begin commanding the robot.");
             while (true) ;

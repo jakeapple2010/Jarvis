@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Speech.Recognition;
 using System.Threading;
@@ -50,7 +51,7 @@ namespace Jarvis.SpeechRecognition
                 {
                     var result = streamingCall.ResponseStream.Current.Results.FirstOrDefault();
                     var transcript = result?.Alternatives.OrderBy(t => t.Confidence).Select(x => x.Transcript).ToList();
-                    Task.Run(() => eventHandler.eventSpeechRecognized(new VoiceRecognizedEvent
+                    await Task.Run(() => eventHandler.eventSpeechRecognized(new VoiceRecognizedEvent
                     {
                         Transcripts = transcript
                     }));
@@ -65,6 +66,12 @@ namespace Jarvis.SpeechRecognition
             waveIn.DataAvailable +=
                 (sender, args) =>
                 {
+                    double decibel = -95;
+                    if (args.Buffer != null)
+                    {
+                        decibel = CalculateDecibels(args.Buffer);
+                        Console.WriteLine($"Decibel level: {decibel}");
+                    }
                     lock (writeLock)
                     {
                         if (!writeMore) return;
@@ -85,6 +92,20 @@ namespace Jarvis.SpeechRecognition
             await streamingCall.WriteCompleteAsync();
             await printResponses;
             return 0;
+        }
+
+        private double CalculateDecibels(byte[] buffer)
+        {
+            double sum = 0;
+            for (var i = 0; i < buffer.Length; i = i + 2)
+            {
+                double sample = BitConverter.ToInt16(buffer, i) / 32768.0;
+                sum += (sample * sample);
+            }
+            var rms = Math.Sqrt(sum / (buffer.Length / 2));
+            var decibel = 20 * Math.Log10(rms);
+
+            return decibel;
         }
     }
 }
